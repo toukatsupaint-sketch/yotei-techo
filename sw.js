@@ -1,5 +1,5 @@
 // 予定手帖 Service Worker：画面ファイルを保存して、電波が弱くてもすぐ開けるようにする
-const CACHE = 'yotei-techo-v1';
+const CACHE = 'yotei-techo-v2';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'config.js', 'manifest.webmanifest',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 

@@ -1,22 +1,25 @@
+/* 予定手帖：黒い背景（Googleカレンダーのダークテーマに近い配色） */
 :root {
   --fs: 1;
-  --bg: #ffffff;
-  --ink: #1f1f1f;
-  --sub: #5f6368;
-  --line: #d6d9de;
-  --other: #f3f4f6;
-  --other-ink: #9aa0a6;
-  --today-bg: #fff7d6;
-  --today-ring: #1a73e8;
-  --sun: #d93025;
-  --sat: #1a73e8;
-  --chip-bg: #f5f6f8;
-  --accent: #1a73e8;
-  color-scheme: light;
+  --bg: #131314;          /* 画面の背景 */
+  --surface: #1e1f20;     /* ボタン・シートの背景 */
+  --surface-2: #2a2b2e;   /* 押したとき */
+  --ink: #e8eaed;         /* 文字 */
+  --sub: #a8adb3;         /* 補足の文字 */
+  --line: #3c4043;        /* 罫線 */
+  --other: #1a1b1c;       /* 前後の月のマス */
+  --other-ink: #6f7378;
+  --today-bg: #1d2a40;    /* 今日のマス */
+  --today-ring: #8ab4f8;
+  --sun: #f28b82;
+  --sat: #8ab4f8;
+  --accent: #8ab4f8;
+  --on-accent: #131314;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; background: var(--bg); }
 body {
   margin: 0;
   background: var(--bg);
@@ -32,7 +35,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ===== 上部バー ===== */
 .topbar {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(255,255,255,0.97);
+  background: rgba(19, 19, 20, 0.97);
   padding-top: env(safe-area-inset-top);
   border-bottom: 1px solid var(--line);
 }
@@ -42,14 +45,14 @@ button { font: inherit; color: inherit; cursor: pointer; }
   border: none; background: none; font-size: 2em; line-height: 1;
   width: 48px; height: 44px; border-radius: 12px;
 }
-.icon-btn:active { background: #eef0f3; }
+.icon-btn:active { background: var(--surface-2); }
 .icon-btn.small { font-size: 1.35em; width: 40px; height: 38px; }
 .tool-row { display: flex; align-items: center; gap: 4px; padding: 0 8px 6px; }
 .pill {
-  border: 1px solid var(--line); background: #fff; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
   padding: 5px 16px; font-weight: 600; font-size: 0.95em;
 }
-.pill:active { background: #eef0f3; }
+.pill:active { background: var(--surface-2); }
 .status { flex: 1; text-align: right; color: var(--sub); font-size: 0.78em; padding-right: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status.err { color: var(--sun); }
 .status.loading::before { content: ""; display: inline-block; width: 0.8em; height: 0.8em; margin-right: 4px; vertical-align: -1px; border: 2px solid var(--accent); border-right-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -83,10 +86,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .daynum.sun .n, .daynum.hol .n { color: var(--sun); }
 .daynum.sat .n { color: var(--sat); }
 .daynum.other .n { color: var(--other-ink); }
-.daynum.today .n { background: var(--today-ring); color: #fff; }
+.daynum.today .n { background: var(--today-ring); color: var(--on-accent); }
 .daynum .hname { display: block; font-size: 0.62em; color: var(--sun); line-height: 1.15; font-weight: 500; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding: 0 2px; }
 
-/* 期間予定の帯 */
+/* 期間予定の帯：Googleカレンダーと同じ色で塗りつぶし */
 .bar {
   z-index: 2; min-width: 0; align-self: start;
   margin: 1px 2px; padding: 2px 5px;
@@ -95,6 +98,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   overflow-wrap: anywhere; word-break: break-all;
   border: none; text-align: left;
   display: flex; align-items: center; gap: 3px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 .bar.cont-l { border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
 .bar.cont-r { border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; }
@@ -102,38 +106,38 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .bar .btxt { flex: 1; min-width: 0; }
 .bar .btime { font-weight: 500; opacity: 0.95; }
 
-/* 時間のある予定 */
+/* 時間のある予定：左に会社の色の太線＋同じ色を暗くした背景 */
 .timed { grid-row: -2; z-index: 1; min-width: 0; padding: 2px 2px 6px; display: flex; flex-direction: column; gap: 2px; }
 .ev {
   display: block; width: 100%; text-align: left; min-width: 0;
   border: none; border-left: 4px solid var(--c);
-  background: var(--chip-bg);
-  background: color-mix(in srgb, var(--c) 13%, #fff);
+  background: var(--surface);
+  background: color-mix(in srgb, var(--c) 30%, var(--surface));
   border-radius: 3px; padding: 1px 3px 2px;
   font-size: 0.72em; line-height: 1.25;
   overflow-wrap: anywhere; word-break: break-all;
 }
-.ev .t { display: block; font-weight: 700; color: var(--sub); font-size: 0.92em; letter-spacing: -0.02em; }
-.ev .s { display: block; color: var(--ink); }
+.ev .t { display: block; font-weight: 700; color: #d2d5d9; font-size: 0.92em; letter-spacing: -0.02em; }
+.ev .s { display: block; color: #ffffff; }
 
 /* ===== 凡例 ===== */
 .legend-wrap { padding: 14px 14px 28px; }
 .legend-wrap h2 { font-size: 0.95em; margin: 0 0 8px; color: var(--sub); }
-.legend { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px 12px; }
-.legend li { display: flex; align-items: center; gap: 8px; font-size: 0.92em; }
-.legend .sw { width: 22px; height: 16px; border-radius: 4px; flex: none; }
-.legend .cname { color: var(--sub); font-size: 0.85em; }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px 12px; }
+.legend li { display: flex; align-items: center; gap: 8px; font-size: 0.95em; flex-wrap: wrap; }
+.legend .sw { width: 24px; height: 18px; border-radius: 4px; flex: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15); }
+.legend .cname { color: var(--sub); font-size: 0.8em; }
 .legend .count { margin-left: auto; color: var(--sub); font-size: 0.8em; }
-.legend .unused { opacity: 0.45; }
+.legend .unused { opacity: 0.5; }
 
 /* ===== シート（詳細・設定） ===== */
 .sheet-backdrop {
-  position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.35);
+  position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.6);
   display: flex; align-items: flex-end; justify-content: center;
 }
 .sheet-backdrop[hidden] { display: none; }
 .sheet {
-  background: #fff; width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
+  background: var(--surface); width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
   border-radius: 18px 18px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
   animation: up 0.18s ease-out;
 }
@@ -146,20 +150,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .detail-list a { color: var(--accent); }
 .wide-btn {
   display: block; width: 100%; margin-top: 8px; padding: 12px; border-radius: 12px;
-  border: 1px solid var(--line); background: #fff; font-weight: 600;
+  border: 1px solid var(--line); background: var(--surface); font-weight: 600;
 }
-.wide-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.wide-btn:active { filter: brightness(0.95); }
+.wide-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.wide-btn:active { filter: brightness(0.9); }
 .note { color: var(--sub); font-size: 0.88em; margin: 0 0 12px; line-height: 1.5; }
 .field { display: block; margin-bottom: 12px; font-size: 0.9em; font-weight: 600; }
 .field input {
   display: block; width: 100%; margin-top: 4px; padding: 10px; font-size: 16px;
-  border: 1px solid var(--line); border-radius: 10px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink);
 }
 .seg { display: flex; margin-top: 6px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-.seg button { flex: 1; border: none; background: #fff; padding: 9px 0; border-right: 1px solid var(--line); }
+.seg button { flex: 1; border: none; background: var(--bg); padding: 9px 0; border-right: 1px solid var(--line); }
 .seg button:last-child { border-right: none; }
-.seg button.on { background: var(--accent); color: #fff; }
+.seg button.on { background: var(--accent); color: var(--on-accent); }
 .error { color: var(--sun); font-size: 0.88em; }
 
 .empty-msg { text-align: center; color: var(--sub); padding: 10px; font-size: 0.85em; }

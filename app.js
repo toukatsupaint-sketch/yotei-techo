@@ -15,7 +15,8 @@
     '10': { name: 'バジル',       hex: '#0B8043' },
     '11': { name: 'トマト',       hex: '#D50000' },
   };
-  const COLOR_ORDER = ['11', '4', '6', '5', '2', '10', '7', '9', '1', '3', '8', ''];
+  // 凡例の並び：協力会社（トマト・フラミンゴ・バナナ・バジル）→ 自社（既定色）→ その他の色
+  const COLOR_ORDER = ['11', '4', '5', '10', '', '6', '2', '7', '9', '1', '3', '8'];
   const WD = ['日', '月', '火', '水', '木', '金', '土'];
   const CONFIG = window.YOTEI_CONFIG || { companies: {} };
   const companies = CONFIG.companies || {};
@@ -374,11 +375,11 @@
     const T = (d, h, mi = 0) => `${D(d)}T${pad(h)}:${pad(mi)}`;
     const ev = (title, start, end, colorId, extra = {}) => Object.assign({ id: title + start, title, start, end, allDay: start.length === 10, colorId, location: '', description: '' }, extra);
     const events = [
-      ev('〇〇邸 外壁塗装', D(3), D(13), '7', { location: '千葉県松戸市', description: '足場：3日設置\n下塗り→中塗り→上塗り' }),
+      ev('〇〇邸 外壁塗装', D(3), D(13), '', { location: '千葉県松戸市', description: '足場：3日設置\n下塗り→中塗り→上塗り' }),
       ev('△△マンション 大規模修繕', D(-2), D(21), '10'),
-      ev('□□ビル 屋上防水', D(14), D(19), '6'),
+      ev('□□ビル 屋上防水', D(14), D(19), '4'),
       ev('◇◇様邸 付帯部塗装', D(22), D(27), '5'),
-      ev('☆☆アパート 鉄部塗装', D(27), D(36), '9'),
+      ev('☆☆アパート 鉄部塗装', D(27), D(36), '11'),
       ev('見積提出', D(8), D(9), '11'),
       ev('材料搬入', D(17), D(18), '2'),
       ev('夜間作業 ××駅前', T(11, 20), T(13, 5), '8'),
